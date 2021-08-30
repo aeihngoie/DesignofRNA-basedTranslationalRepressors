@@ -1,6 +1,9 @@
-#Example Nupack code for 3WJ repressor
-material = rna1999 # specify RNA energy parameters, values = rna1995 or rna1999  
+# Sample NUPACK Code for a 3WJ repressor
+
+# specify RNA energy parameters, values = rna1995 or rna1999
 # number of designs, values = 1 to 10
+material = rna1999 
+temperature = 37.0
 trials = 10
 
 # target structures
@@ -16,17 +19,21 @@ domain toehold = N15
 domain stem1 = UUGUU
 domain stem2 = AUA
 domain stem3 = GUUAUG
-#AGAGGAGA sequence is the RBS sequence to allow efficient translation.
+
+# AGAGGAGA sequence is the RBS sequence to allow efficient translation.
+# bases added after binding site to ensure the 3WJ repressor and gene are in the same reading frame
 domain loop = AACAGAGGAGA
 domain stem2_star = AUG
 domain post_hairpin1 = N2
 domain post_hairpin2 = N10
-domain post_hairpin3 = N7 # bases added after binding site to ensure the 3WJ repressor and gene are in the same reading frame
-#Common linker sequence from Green et al.[1]
+domain post_hairpin3 = N7 
+
+# Common linker sequence from Green et al.[6]
 domain linker = AACCUGGCGGCAGCGCAAAAG  
 
 Sw.seq = preG toehold stem1 stem2 stem3 loop stem3* stem2_star stem1* post_hairpin1 post_hairpin2 post_hairpin3 linker
 Tr.seq = preG targ_stem targ_loop targ_stem* post_hairpin1* toehold*
 Sw_Tr.seq = preG toehold stem1 stem2 stem3 loop stem3* stem2_star stem1* post_hairpin1 post_hairpin2 post_hairpin3 linker preG targ_stem targ_loop targ_stem* post_hairpin1* toehold*
 
+# prevent sequence patterns
 prevent = AAAA, CCCC, GGGG, UUUU, KKKKKKKK, MMMMMM, RRRRRR, SSSSSS, WWWWWW, YYYYYY
